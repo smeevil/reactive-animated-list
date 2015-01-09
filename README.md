@@ -4,7 +4,7 @@
 
 This plugin will create a reactive animated list that you can use in Meteor. If you update or filter your collection/cursor it will be automatically reflected in the layout using animations.
 
-For the animations it automatically detects and uses GSAP if it is available in your project. If not it will fall back to jQuery.
+For the animations it automatically detects and uses [Greensock GSAP](https://greensock.com/gsap) if it is available in your project. If not it will fall back to jQuery.
  
 ### Preview :
 ![img](https://s3.amazonaws.com/f.cl.ly/items/1p1o0t1R2V3x2H1R3N1B/Screen%20Recording%202015-01-09%20at%2004.32%20pm.gif)
