@@ -1,0 +1,15 @@
+template(name="reactiveList")
+  if hasErrors
+    .reactive-list-errors
+      .header Reactive List Errors
+      ul.errors !{errors}
+  .reactive-list-items-container
+    each cursor
+      +reactiveListItem
+
+  ul.reactive-list(style="position: relative")
+
+template(name='reactiveListItem')
+  .reactive-list-item-container
+    li(data-reactive-list-item-id="#{_id}" data-reactive-list-position="#{positionInCursor}" style="position: absolute")
+      +Template.dynamic(template=template)
