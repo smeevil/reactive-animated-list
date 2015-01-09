@@ -1,4 +1,4 @@
-# Reactive Block Grid
+# Reactive Animated List
 
 ### What does it do ?
 
