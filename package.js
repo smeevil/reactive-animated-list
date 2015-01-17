@@ -1,7 +1,7 @@
 Package.describe({
   name: 'smeevil:reactive-animated-list',
-  summary: 'Given a cursor and a template this will create a reactive animated list',
-  version: '1.0.0',
+  summary: 'Dropped the jquery debounce plugin, using the underscorejs one',
+  version: '1.0.1',
   git: 'https://github.com/smeevil/reactive-animated-list.git'
 });
 
@@ -14,7 +14,6 @@ Package.onUse(function(api) {
         'coffeescript@1.0.0',
         'mquandalle:jade@0.4.1',
         'fourseven:scss@1.0.0',
-        'smeevil:debounce@1.0.0',
       ]
   );
 
