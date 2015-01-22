@@ -1,7 +1,7 @@
 Package.describe({
   name: 'smeevil:reactive-animated-list',
-  summary: 'experimental support for tables as well as lists',
-  version: '1.0.2',
+  summary: 'Removal is now fading out',
+  version: '1.0.3',
   git: 'https://github.com/smeevil/reactive-animated-list.git'
 });
 

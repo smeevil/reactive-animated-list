@@ -42,7 +42,17 @@ class ReactiveList
         $self.UpdateMappingCache(cursor)
 
       removed: (doc) ->
-        $("[data-reactive-list-item-id=#{doc._id}]").remove()
+        try
+          el = $("[data-reactive-list-item-id=#{doc._id}]")
+          if $self.options.animationEngine == 'gsap'
+            TweenLite.to item, $self.options.gsap.animationDuration, opacity: 0, ease: $self.options.easing, onComplete: ->
+              el.remove()
+          if $self.options.animationEngine == 'jquery'
+            el.fadeOut $self.options.jquery.animationDuration, ->
+              el.remove()
+          else
+            el.remove()
+
         $self.UpdateMappingCache(cursor)
 
 
