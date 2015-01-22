@@ -1,7 +1,7 @@
 Package.describe({
   name: 'smeevil:reactive-animated-list',
-  summary: 'Dropped the jquery debounce plugin, using the underscorejs one',
-  version: '1.0.1',
+  summary: 'experimental support for tables as well as lists',
+  version: '1.0.2',
   git: 'https://github.com/smeevil/reactive-animated-list.git'
 });
 

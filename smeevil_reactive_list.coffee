@@ -60,19 +60,19 @@ class ReactiveList
 
 
   Order: _.throttle ->
-    for ul in $('ul.reactive-list')
-      ul = $(ul)
-      @MoveItemsFromContainerToList(ul)
+    for el in $('.reactive-list')
+      el = $(el)
+      @MoveItemsFromContainerToList(el)
     @Animate()
   , 250
 
   Animate: () ->
-    for ul in $('ul.reactive-list')
-      ul = $(ul)
+    for el in $('.reactive-list')
+      el = $(el)
       relativeOffset = 0
-      elements = ul.find('li')
+      elements = el.find('.reactive-list-item')
       for i in [0...elements.length]
-        item = ul.find("[data-reactive-list-position=#{i}]")
+        item = el.find("[data-reactive-list-position=#{i}]")
         if @options.animationEngine == 'gsap'
           TweenLite.to item, @options.gsap.animationDuration, css: {top: relativeOffset}, ease: @options.easing
         else if @options.animationEngine == 'jquery'
@@ -84,28 +84,34 @@ class ReactiveList
 
       newUlHeight = relativeOffset + 2
       if @options.animationEngine == 'gsap'
-        TweenLite.to ul, @options.gsap.animationDuration, height: newUlHeight, ease: @options.easing
+        TweenLite.to el, @options.gsap.animationDuration, height: newUlHeight, ease: @options.easing
       else if @options.animationEngine == 'jquery'
-        ul.animate {height: newUlHeight}, duration: @options.jquery.animationDuration, queue: false, easing: @options.easing
+        el.animate {height: newUlHeight}, duration: @options.jquery.animationDuration, queue: false, easing: @options.easing
       else
-        ul.css 'height', newUlHeight
+        el.css 'height', newUlHeight
 
-  MoveItemsFromContainerToList: (ul)->
-    container = ul.prev()
-    for li in container.find('li')
-      li = $(li)
+  MoveItemsFromContainerToList: (el)->
+    container = el.prev()
+    for item in container.find('.reactive-list-item')
+      item = $(item)
       if @options.animationEngine == 'gsap'
-        TweenLite.to li, 0, opacity: 0
-        ul.append(li)
-        TweenLite.to li, @options.gsap.animationDuration, opacity: 1, ease: @options.easing
+        TweenLite.to item, 0, opacity: 0
+        el.append(item)
+        TweenLite.to item, @options.gsap.animationDuration, opacity: 1, ease: @options.easing
       if @options.animationEngine == 'jquery'
-        li.hide()
-        ul.append(li)
-        li.fadeIn @options.jquery.animationDuration
+        item.hide()
+        el.append(item)
+        item.fadeIn @options.jquery.animationDuration
       else
-        ul.append(li)
+        el.append(item)
 
 Template.reactiveListItem.helpers
+  listStyle: ->
+    Template.parentData(1)._ReactiveList.options.layout=='list'
+
+  tableStyle: ->
+    Template.parentData(1)._ReactiveList.options.layout=='table'
+
   positionInCursor: ->
     Template.parentData(1)._ReactiveList.IndexOfIdInCursor(@_id)
 
@@ -129,10 +135,17 @@ Template.reactiveList.helpers
     @_ReactiveList.ObserveCursor(@cursor)
     @cursor
 
+  listStyle: ->
+    @_ReactiveList.options.layout=='list'
+
+  tableStyle: ->
+    @_ReactiveList.options.layout=='table'
+
   template: -> @template
 
 Template.reactiveList.created = ->
   options = {gsap: {}, jquery: {}}
+  options.layout = @data?.layout || 'list'
   options.gsap.animationDuration = @data?.animationDuration || 0.3 #we use seconds , as does gasp
   options.jquery.animationDuration = (@data?.animationDuration || 0.3) * 1000 #we use seconds , jquery is in ms
   options.easing = @data?.easing

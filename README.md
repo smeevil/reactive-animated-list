@@ -31,10 +31,27 @@ The most basic option to use it in your templates is as follows :
 ~~~
 
 You can pass options to manage the animation duration, which easing to use and which animation engine
-
 ~~~js
 {{> reactiveList cursor=exampleDataCursor template='exampleData' animationDuration=0.5 easing='Power0.easeInOut' engine='gsap'}}
 ~~~
+
+
+**Experimental table layout:**
+
+If you rather add items to a table, then use the new experimental options layout="table" like so :
+
+~~~js
+<table>
+	<thead>
+		<tr>
+			<th>example</th>
+		</tr>
+	</thead>
+			
+	{{> reactiveList cursor=exampleDataCursor template='exampleData' 	layout="table")}}
+</table>
+~~~
+This will add the items in a &lt;tbody/&gt; holder with &lt;tr/&gt; elements , so your template should only have the &lt;td/&gt; elements
 
 
 Licensed under the WTFPL License. See the `LICENSE` file for details.

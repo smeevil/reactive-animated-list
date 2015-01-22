@@ -7,9 +7,19 @@ template(name="reactiveList")
     each cursor
       +reactiveListItem
 
-  ul.reactive-list(style="position: relative")
+  if listStyle
+    ul.reactive-list(style="position: relative")
+
+  if tableStyle
+    tbody.reactive-list
+
 
 template(name='reactiveListItem')
   .reactive-list-item-container
-    li(data-reactive-list-item-id="#{_id}" data-reactive-list-position="#{positionInCursor}" style="position: absolute")
-      +Template.dynamic(template=template)
+    if listStyle
+      li.reactive-list-item(data-reactive-list-item-id="#{_id}" data-reactive-list-position="#{positionInCursor}" style="position: absolute")
+        +Template.dynamic(template=template)
+
+    if tableStyle
+      tr.reactive-list-item(data-reactive-list-item-id="#{_id}" data-reactive-list-position="#{positionInCursor}" )
+        +Template.dynamic(template=template)
